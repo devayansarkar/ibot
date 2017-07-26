@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""importing modules requried"""
 import os
 import sys
 
@@ -9,6 +10,7 @@ if __name__ == "__main__":
     except ImportError:
         try:
             import django
+            #trying to import django to check everything is fine
         except ImportError:
             raise ImportError(
                 "--Unable to import django--"
