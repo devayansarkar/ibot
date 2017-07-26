@@ -13,5 +13,4 @@ def send_text_message(fbid, text):
     """Sends messages to Facebook"""
     post_message_url = ENDPOINT_URL%PAGE_ACCESS_TOKEN
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":text}})
-    resp=requests.post(post_message_url, headers={"Content-Type": "application/json"}, data = response_msg)
-    print(resp.content)
+    resp=requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)

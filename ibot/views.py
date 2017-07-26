@@ -35,4 +35,4 @@ class BotController(generic.View):
             for message in entry['messaging']:
                 if 'message' in message:
                     facebook.send_text_message(message['sender']['id'], message['message']['text'])
-        return HttpResponse() 
+        return HttpResponse()
