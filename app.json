@@ -1,0 +1,8 @@
+{
+    "name": "Python with django rest framework",
+    "description": "A Python app, which can easily be deployed to Heroku.",
+    "image": "heroku/python",
+    "repository": "https://github.com/devayansarkar/ibot",
+    "keywords": ["python", "django"],
+    "addons": ["heroku-postgresql"]
+}
