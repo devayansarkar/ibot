@@ -10,7 +10,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 #Should be turned off in prod
 DEBUG = False
 
-ALLOWED_HOSTS = ['*facebook*']
+ALLOWED_HOSTS = ['*facebook.com']
 
 
 # Application definition
