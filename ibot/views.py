@@ -13,7 +13,7 @@ class BotController(generic.View):
     def get(self, *args, **kwargs):
         """Authenticates Facebook webhook"""
         try:
-            if self.request.GET['hub.verify_token'] == os.getenv('VERIFY_TOKEN'):
+            if self.request.GET['hub.verify_token'] is os.getenv('VERIFY_TOKEN'):
                 return HttpResponse(self.request.GET['hub.challenge'])
             else:
                 res = HttpResponse('Error, invalid token')
@@ -25,9 +25,6 @@ class BotController(generic.View):
             res.status_code = 400
             return res
 
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return generic.View.dispatch(self, request, *args, **kwargs)
     def post(self, *args, **kwargs):
         """Receives all messages sent to the webhook"""
         incoming_message = json.loads(self.request.body.decode('utf-8'))
@@ -36,3 +33,8 @@ class BotController(generic.View):
                 if 'message' in message:
                     facebook.send_text_message(message['sender']['id'], message['message']['text'])
         return HttpResponse()
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        """For Cross Site Request Forgery protection"""
+        return generic.View.dispatch(self, request, *args, **kwargs)
