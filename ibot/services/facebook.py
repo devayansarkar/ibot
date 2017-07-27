@@ -8,9 +8,13 @@ import requests
 PAGE_ACCESS_TOKEN = os.getenv('PAGE_ACCESS_TOKEN')
 ENDPOINT_URL = 'https://graph.facebook.com/v2.10/me/messages?access_token=%s'
 
-# Send simple message to enduser
+
 def send_text_message(fbid, text):
-    """Sends messages to Facebook"""
+    """Create a simple text message to be sent to the end user"""
+    payload = json.dumps({"recipient":{"id":fbid}, "message":{"text":text}})
+    send_message(payload)
+
+def send_message(payload):
+    """Send message to be sent to the end user"""
     post_message_url = ENDPOINT_URL%PAGE_ACCESS_TOKEN
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":text}})
-    resp=requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
+    requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=payload)    
