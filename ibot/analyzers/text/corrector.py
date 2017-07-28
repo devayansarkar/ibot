@@ -13,7 +13,7 @@ def train(features):
         model[feature] += 1
     return model
 
-NWORDS = train(words_in_file(open('corpus.txt',encoding="utf8").read()))
+NWORDS = train(words_in_file(open('corpus.txt',encoding='utf8').read()))
 ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
 
