@@ -2,6 +2,7 @@
 import json
 import os
 from ibot.services import facebook
+from ibot.analyzers.text import parser
 from django.views import generic
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -28,10 +29,13 @@ class BotController(generic.View):
     def post(self, *args, **kwargs):
         """Receives all messages sent to the webhook"""
         incoming_message = json.loads(self.request.body.decode('utf-8'))
+        print(incoming_message)
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 if 'message' in message:
-                    facebook.send_text_message(message['sender']['id'], message['message']['text'])
+                    sender_id = message['sender']['id']
+                    text = parser.parse_text(sender_id, message['message']['text'])
+                    facebook.send_text_message(sender_id, text)
         return HttpResponse()
 
     @method_decorator(csrf_exempt)
