@@ -29,13 +29,13 @@ class BotController(generic.View):
     def post(self, *args, **kwargs):
         """Receives all messages sent to the webhook"""
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        print(incoming_message)
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 if 'message' in message:
                     sender_id = message['sender']['id']
-                    text = parser.parse_text(message['message']['text'],sender_id)
-                    facebook.send_text_message(sender_id, text)
+                    responses = parser.parse_text(message['message']['text'],sender_id)
+                    for resp in responses:
+                        facebook.send_text_message(sender_id, resp)
         return HttpResponse()
 
     @method_decorator(csrf_exempt)

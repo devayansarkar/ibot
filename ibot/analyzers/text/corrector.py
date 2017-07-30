@@ -23,7 +23,7 @@ def correct_text(text):
     """splits the text into string and corrects it word by word"""
     words = text.split()
     for word in words:
-        corrected_word = correct_word(word)
+        corrected_word = correct_word(word.lower())
         if corrected_word is not word:
            text = text.replace(word,corrected_word)
     return text
