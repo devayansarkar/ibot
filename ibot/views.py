@@ -34,7 +34,7 @@ class BotController(generic.View):
             for message in entry['messaging']:
                 if 'message' in message:
                     sender_id = message['sender']['id']
-                    text = parser.parse_text(sender_id, message['message']['text'])
+                    text = parser.parse_text(message['message']['text'],sender_id)
                     facebook.send_text_message(sender_id, text)
         return HttpResponse()
 
