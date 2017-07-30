@@ -24,7 +24,7 @@ def correct_text(text):
     words = text.split()
     for word in words:
         corrected_word = correct_word(word.lower())
-        if corrected_word is not word:
+        if corrected_word.lower() is not word.lower():
            text = text.replace(word,corrected_word)
     return text
 
