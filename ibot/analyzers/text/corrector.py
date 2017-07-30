@@ -1,6 +1,8 @@
 """importing required modules"""
 import re
 import collections
+import os
+from app.settings import STATIC_ROOT
 
 def words_in_file(text):
     """finds all words in the corpus"""
@@ -13,7 +15,7 @@ def train(features):
         model[feature] += 1
     return model
 
-NWORDS = train(words_in_file(open('corpus.txt',encoding='utf8').read()))
+NWORDS = train(words_in_file(open(os.path.join(STATIC_ROOT, 'corpus.txt'),encoding='utf8').read()))
 ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
 
